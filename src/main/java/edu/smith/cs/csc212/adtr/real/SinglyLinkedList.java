@@ -14,17 +14,46 @@ public class SinglyLinkedList<T> extends ListADT<T> {
 	@Override
 	public T removeFront() {
 		checkNotEmpty();
-		throw new TODOErr();
+		T removed = this.start.value;
+		this.start = start.next;
+		
+		return removed;
 	}
 
 	@Override
 	public T removeBack() {
-		throw new TODOErr();
+		checkNotEmpty();
+		T removed = null;
+		
+		if (size() == 1) {
+			removed = getIndex(0);
+			this.start = null;
+		} else {
+			for (Node<T> n = this.start; n != null; n = n.next) {
+				if (n.next == null) {
+					removed = n.value;
+					for (Node<T> l = this.start; l != null; l = l.next) {
+						if (l.next == n) {
+							l.next = null;
+						}
+					}
+				}
+			}
+		}
+		
+		return removed;
 	}
 
 	@Override
 	public T removeIndex(int index) {
-		throw new TODOErr();
+		checkNotEmpty();
+		T removed = this.getIndex(index);
+		
+		//Connect the previous node to the next node and return the value of removed node
+		
+		
+		
+		return removed;
 	}
 
 	@Override
@@ -34,7 +63,18 @@ public class SinglyLinkedList<T> extends ListADT<T> {
 
 	@Override
 	public void addBack(T item) {
-		throw new TODOErr();
+		
+		 Node<T> lastNodeInList = null;
+		 
+		 for (Node<T> current = this.start; current != null; current = current.next) {
+			 lastNodeInList = current;
+		 }
+		 
+		 if (this.isEmpty()) {
+			 this.addFront(item);
+			 } else {
+				 lastNodeInList.next = new Node<T>(item, null);
+			 }
 	}
 
 	@Override
@@ -47,13 +87,14 @@ public class SinglyLinkedList<T> extends ListADT<T> {
 	@Override
 	public T getFront() {
 		checkNotEmpty();
-		throw new TODOErr();
+		return getIndex(0);
 	}
 
 	@Override
 	public T getBack() {
 		checkNotEmpty();
-		throw new TODOErr();
+		int lastIndex = size() -  1;
+		return getIndex(lastIndex);
 	}
 
 	@Override
@@ -72,7 +113,14 @@ public class SinglyLinkedList<T> extends ListADT<T> {
 	@Override
 	public void setIndex(int index, T value) {
 		checkNotEmpty();
-		throw new TODOErr();
+		this.checkExclusiveIndex(index);
+		
+		int at = 0;
+		for (Node<T> n = this.start; n != null; n = n.next) {
+			if (at++ == index) {
+				n.value = value;
+			}
+		}
 	}
 
 	@Override

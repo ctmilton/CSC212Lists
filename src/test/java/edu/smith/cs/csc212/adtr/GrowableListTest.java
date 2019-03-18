@@ -156,7 +156,7 @@ public class GrowableListTest {
 		for (int i=0; i<GrowableList.START_SIZE*5; i++) {
 			items1.addBack((i+1)*3);
 			Assert.assertEquals(i+1, items1.size());
-			Assert.assertEquals((i+1)*3, (int) items1.getBack()); 
+			Assert.assertEquals((i+1)*3, (int) items1.getBack());
 		}
 		
 		Random rand = new Random(13);

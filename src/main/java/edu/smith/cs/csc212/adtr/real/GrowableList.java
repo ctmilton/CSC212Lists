@@ -30,12 +30,16 @@ public class GrowableList<T> extends ListADT<T> {
 		checkNotEmpty();
 		checkExclusiveIndex(index);
 		
-		T removed = this.getIndex(index);
+		//Shift all values past the index in the list to the left.
 		
-		// TODO: Now we need to slide everything to the left.
-		throw new TODOErr();
-		// When we're done, give back the thing that we removed.
-		//return removed;
+		T removed = this.getIndex(index);
+		fill--;
+		
+		for (int i=index; i<fill; i++) {
+			this.array[i] = this.array[i+1];
+		}
+		this.array[fill] = null;
+		return removed;
 	}
 
 	@Override
@@ -55,7 +59,15 @@ public class GrowableList<T> extends ListADT<T> {
 	 * This private method is called when we need to make room in our GrowableList.
 	 */
 	private void resizeArray() {
-		throw new TODOErr();
+		//throw new TODOErr();
+		int newSize = fill * 2;
+		Object[] newArray = new Object[newSize];
+		
+		for (int i=0; i<array.length; i++) {
+			newArray[i] = array[i];
+		}
+		
+		this.array = newArray;
 	}
 
 	@Override
@@ -110,7 +122,9 @@ public class GrowableList<T> extends ListADT<T> {
 
 	@Override
 	public void setIndex(int index, T value) {
-		throw new TODOErr();
+		checkNotEmpty();
+		this.checkExclusiveIndex(index);
+		this.array[index] = value;
 	}
 
 }
