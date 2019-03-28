@@ -33,7 +33,7 @@ public class FixedSizeList<T> extends ListADT<T> {
 	public void setIndex(int index, T value) {
 		checkNotEmpty();
 		this.checkExclusiveIndex(index);
-		this.array[index] = value;	
+		this.array[index] = value;
 	}
 
 	@SuppressWarnings("unchecked")
